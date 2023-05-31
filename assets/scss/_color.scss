@@ -1,0 +1,41 @@
+:root {
+  --color-primary: #6088b1;
+  --color-secondary: #797d82;
+  --color-active: #d5421c;
+  --color-current: #222222;
+  --color-success: #97c07c;
+  --color-gray: #959696;
+  --color-bg: #f5f5f5;
+  --color-facebook: #334c8d;
+  --color-linkedin: #1568bf;
+}
+.backColorPrimary {
+  background-color: var(--color-primary);
+}
+.backColorSecondary {
+  background-color: var(--color-secondary);
+}
+.backColorActive {
+  background-color: var(--color-active);
+}
+.backColorFacebook {
+  background-color: var(--color-facebook);
+}
+.backColorLinkedin {
+  background-color: var(--color-linkedin);
+}
+.backColorBg {
+  background-color: var(--color-bg);
+}
+.colorGray {
+  color: var(--color-gray);
+}
+.colorCurrent {
+  color: var(--color-current);
+}
+.colorActive {
+  color: var(--color-active);
+}
+.colorSecondary {
+  color: var(--color-secondary);
+}

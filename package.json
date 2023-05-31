@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxtjs/i18n": "^8.0.0-beta.8",
+    "@nuxtjs/strapi": "^1.7.1",
+    "@nuxtjs/tailwindcss": "^6.3.0",
+    "nuxt": "^3.1.0",
+    "nuxt-time": "^0.0.3"
+  },
+  "dependencies": {
+    "@formkit/nuxt": "^0.16.4",
+    "@hannanmiah/light-editor": "^0.0.18",
+    "@vuelidate/core": "^2.0.2",
+    "@vuelidate/validators": "^2.0.2",
+    "@vueup/vue-quill": "^1.1.0",
+    "nuxt-icons": "^3.1.0"
+  }
+}

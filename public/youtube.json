@@ -1,0 +1,352 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "r9PvrXZziQyAUBPMR5ekWXIfSOs",
+  "nextPageToken": "CAoQAA",
+  "regionCode": "DE",
+  "pageInfo": {
+    "totalResults": 54,
+    "resultsPerPage": 10
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "qd-aNvkMvrLhJVRdKc_v6hyqo5s",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "rg9NT01qJQk"
+      },
+      "snippet": {
+        "publishedAt": "2023-04-21T08:38:07Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Як вигідно імпортувати товари у 2023 році",
+        "description": "Продовжуємо разом з Клубом експортерів України розібирати основні зовнішньоекономічні ризики. Цього разу обговорили ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/rg9NT01qJQk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/rg9NT01qJQk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/rg9NT01qJQk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-04-21T08:38:07Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "7k7isarKzPqbr2pY7zzHggtTbVM",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "Q-PGDp71ZTE"
+      },
+      "snippet": {
+        "publishedAt": "2023-04-05T09:10:44Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Як вигідно експортувати товари у 2023 році",
+        "description": "Разом з Клубом експортерів України розібрали основні ризики, які можуть супроводжувати експорт товарів у 2023 році.",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/Q-PGDp71ZTE/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/Q-PGDp71ZTE/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/Q-PGDp71ZTE/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-04-05T09:10:44Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "lBEMqML89pRPU_UZV8AIcRY3Shg",
+      "id": {
+        "kind": "youtube#playlist",
+        "playlistId": "PLaBkJVu2qHglGJLzAmJ_EyQFIBZC_Fayl"
+      },
+      "snippet": {
+        "publishedAt": "2023-02-19T22:35:25Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Здоров&#39;я / Здоровье",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/XG3aN6utXFM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/XG3aN6utXFM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/XG3aN6utXFM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-02-19T22:35:25Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "sTz5Bh9EkUaYSr_xYJgjKwH26i4",
+      "id": {
+        "kind": "youtube#playlist",
+        "playlistId": "PLaBkJVu2qHgnb7YN36wTqdvuukSi8SAy5"
+      },
+      "snippet": {
+        "publishedAt": "2023-02-19T22:32:03Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Аналіз майбутніх подій / Анализ будущих событий",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/--oAeXI3cjs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/--oAeXI3cjs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/--oAeXI3cjs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-02-19T22:32:03Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "HVHxwoAZ20LO9esQwahy_GomZlw",
+      "id": {
+        "kind": "youtube#playlist",
+        "playlistId": "PLaBkJVu2qHgkQYBQkjjzhGQW3YUN72m1o"
+      },
+      "snippet": {
+        "publishedAt": "2023-02-19T22:08:40Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Макроекономіка / Макроэкономика",
+        "description": "",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/-TYKrENHBeQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/-TYKrENHBeQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/-TYKrENHBeQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-02-19T22:08:40Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "timi0ZS5Q6fbmGJuFWG2iS_oUyE",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "-TYKrENHBeQ"
+      },
+      "snippet": {
+        "publishedAt": "2023-02-13T15:47:00Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "📈 Обзор макроэкономических показателей в Украине и в мире на начало 2023 года",
+        "description": "экономика #economy #макроэкономика #клуб_экспертов #макроэкономика #экономика #Уракин #expert_club ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/-TYKrENHBeQ/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/-TYKrENHBeQ/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/-TYKrENHBeQ/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-02-13T15:47:00Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "Mvuvlj1H08i_d72zQVUgmFhtGns",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "uSxz0uyzQCw"
+      },
+      "snippet": {
+        "publishedAt": "2023-01-31T14:09:11Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Египет и Украина - экономика, торговля, сотрудничество",
+        "description": "В этом видео мы попробуем разобраться в перспективах внешнеэкономического сотрудничества Украины с ее самым ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/uSxz0uyzQCw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/uSxz0uyzQCw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/uSxz0uyzQCw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2023-01-31T14:09:11Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "Hhf0ZQmdQapsV4b6i2gs27h-xWA",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "l1DPhlEsDyk"
+      },
+      "snippet": {
+        "publishedAt": "2022-12-06T18:56:46Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Обзор будущих событий 05.12.2022 - 11.12.2022 / Огляд майбутніх подій 05.12.2022 - 11.12.2022",
+        "description": "анонс #події #события У черговому випуску розповімо про головні події, які заплановані в Україні та в світі у період з 5 по 11 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/l1DPhlEsDyk/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/l1DPhlEsDyk/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/l1DPhlEsDyk/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2022-12-06T18:56:46Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "sGDoKlvZeMw3hFC97nrHRqMiZSc",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "6pdsh4XbcGw"
+      },
+      "snippet": {
+        "publishedAt": "2022-11-25T11:11:25Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Зробити бізнес в Європі та світі / сделать бизнес в Европе и мире",
+        "description": "Клуб експертів та Клуб експортерів за підтримки Open4Business.com.ua допоможуть українському бізнесу вийти на ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/6pdsh4XbcGw/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/6pdsh4XbcGw/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/6pdsh4XbcGw/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2022-11-25T11:11:25Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "JeIdrIPbBvRWFq3Fshcqlfc-Pes",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "NiL_QXLiQH8"
+      },
+      "snippet": {
+        "publishedAt": "2022-11-14T06:52:32Z",
+        "channelId": "UC4plQ0XBaoLOKPIXrb1aMGQ",
+        "title": "Обзор будущих событий 14.11.2022 - 20.11.2022 / Огляд майбутніх подій 14.11.2022 - 20.11.2022",
+        "description": "анонс #події #события У черговому випуску розповімо про головні події, які заплановані в Україні та в світі у період з 7 по 11 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/NiL_QXLiQH8/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/NiL_QXLiQH8/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/NiL_QXLiQH8/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Клуб экспертов",
+        "liveBroadcastContent": "none",
+        "publishTime": "2022-11-14T06:52:32Z"
+      }
+    }
+  ]
+}
