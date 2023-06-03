@@ -67,7 +67,7 @@
                   <img
                     @click="onVideo(item)"
                     class="absolute cursor-pointer left-2/4 top-2/4 -mt-9 -ml-9"
-                    src="play.svg"
+                    :src="play"
                   />
                   <img class="w-full" :src="item.snippet.thumbnails.high.url" />
                 </div>
