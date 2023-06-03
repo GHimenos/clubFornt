@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="bg-white rounded-3xl pt-8 sm:pr-16 pb-8 sm:pl-16 pr-8 pl-8">
-      <img class="mb-8" src="logo.svg" />
+      <img class="mb-8" :src="logo" />
       <form>
         <div class="text-red-500">{{ error }}</div>
         <inputLarge
@@ -41,6 +41,7 @@ import { required, email, minLength } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 
 const error = ref("");
+const logo = ref("/logo.svg");
 
 const formData = reactive({
   email: "",
