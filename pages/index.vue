@@ -15,7 +15,7 @@
                       <img
                         @click="onVideo(item)"
                         class="absolute cursor-pointer left-2/4 top-2/4 -mt-9 -ml-9"
-                        src="play.svg"
+                        :src="play"
                       />
                       <img
                         class="w-full"
@@ -172,6 +172,7 @@ const cover = ref(true);
 const experts = ref([]);
 const img = ref("/img2.png");
 const logo = ref("/logo.svg");
+const play = ref("/play.svg");
 const auto = ref([]);
 
 const url = useStrapiUrl();
