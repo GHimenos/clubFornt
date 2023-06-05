@@ -34,6 +34,7 @@ jobs:
           port: ${{ secrets.PORT }}
           source: ".output"
           target: "stage/front"
+
       - name: Restart pm2
         uses: appleboy/ssh-action@master
         with:
