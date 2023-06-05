@@ -1,8 +1,6 @@
-name: test-env CI/CD
+name: prod-env CI/CD
 
 on:
-  push:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -29,7 +27,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: ".output"
-          target: "stage/front"
+          target: "prod/front"
 
       - name: Restart pm2
         uses: appleboy/ssh-action@master
@@ -38,4 +36,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: ~/restart_stage
+          script: ~/restart_prod
