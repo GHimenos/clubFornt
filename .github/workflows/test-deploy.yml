@@ -34,3 +34,11 @@ jobs:
           port: ${{ secrets.PORT }}
           source: ".output"
           target: "stage/front"
+      - name: Restart pm2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: ~/restart_stage
