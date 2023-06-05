@@ -1,4 +1,4 @@
-name: testnet CI/CD
+name: test-env CI/CD
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-  redeploy:
+  test-redeploy:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -28,7 +28,7 @@ jobs:
       - name: Copy dist folder via scp
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.HH_HOST }}
+          host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
