@@ -3,6 +3,9 @@ name: prod-env CI/CD
 on:
   workflow_dispatch:
 
+env:
+  STRAPI_URL: 'http://be.experts.news'
+
 jobs:
   test-redeploy:
     runs-on: ubuntu-latest
