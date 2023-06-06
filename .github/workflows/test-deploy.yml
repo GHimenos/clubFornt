@@ -5,6 +5,9 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+env:
+  STRAPI_URL: 'http://test-api.experts.news'
+
 jobs:
   test-redeploy:
     runs-on: ubuntu-latest
