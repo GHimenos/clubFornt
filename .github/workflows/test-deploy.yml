@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  STRAPI_URL: 'http://test-api.experts.news'
+  STRAPI_URL: 'http://test-be.experts.news'
 
 jobs:
   test-redeploy:
