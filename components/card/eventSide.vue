@@ -10,7 +10,7 @@
           {{ body }}
         </div>
         <div class="mt-5 text-center">
-          <buttonPrimarySemi :name="'Подробнее'" :color="'backColorActive'" />
+          <buttonPrimarySemi :name="'Докладніше'" :color="'backColorActive'" />
         </div>
       </div>
     </div>

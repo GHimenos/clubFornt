@@ -1,10 +1,10 @@
 <template>
   <div>
-    <uiCrumbs first="Главная" second="Новости" secondLink="/news" />
+    <uiCrumbs first="Головна" second="Новини" secondLink="/news" />
     <div class="container mx-auto mt-2 p-5">
       <div class="lg:flex w-full">
         <div class="lg:w-8/12">
-          <div class="text-2xl font-bold">Новости</div>
+          <div class="text-2xl font-bold">Новини</div>
           <formRssPublic v-if="auto" />
           <div class="flex flex-col">
             <div v-for="item in news">
@@ -12,7 +12,7 @@
                 class="mt-4"
                 :title="item.attributes.name"
                 :body="item.attributes.description"
-                :linkText="'Подробнее'"
+                :linkText="'Докладніше'"
                 :link="'/news/' + item.id"
                 :img="api + item.attributes.cover"
               />
@@ -33,14 +33,14 @@
               :color="'backColorPrimary'"
             />
             <div class="absolute z-10 top-2.5 left-2.5 bg-white rounded-md p-2">
-              Реклама от партнеров
+              Реклама від партнерів
             </div>
           </div>
           <cardEventSide
-            :title="'Последний обзор'"
+            :title="'Останній огляд'"
             :link="'/'"
             :img="img4"
-            :body="'Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора '"
+            :body="'Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду'"
           />
         </div>
       </div>

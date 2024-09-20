@@ -4,7 +4,7 @@
       <div class="container mx-auto menuIndex items-center justify-between p-5">
         <nuxt-link to="/"><img src="/logo.svg" /></nuxt-link>
         <inputPrimary
-          :placeholder="'Поиск...'"
+          :placeholder="'Пошук...'"
           class="xl:w-96 w-80 menuButton"
         />
         <div class="flex menuButton">
@@ -25,6 +25,9 @@
             click="onTelegram"
             @onTelegram="onLink('https://t.me/ExpertsNews')"
           />
+          <nuxt-link class="text-2xl pt-2 pl-4" to="/news-admin/">
+            <nuxt-icon name="iconUser" class="text-2xl" />
+          </nuxt-link>
         </div>
       </div>
       <div
@@ -60,7 +63,7 @@
           <div>
             <img class="sm:block hidden" src="/logo.svg" />
             <img class="block sm:hidden" src="/logoIcon.svg" />
-            <p class="text-lg mt-8">Подписывайтесь на наши соцсети:</p>
+            <p class="text-lg mt-8">Підписуйтесь на наші соцмережі:</p>
             <div class="flex mt-4">
               <buttonPrimaryIcon
                 class="mr-4"
@@ -109,7 +112,6 @@
           <div
             class="flex flex-col justify-center text-base font-bold colorGray"
           >
-            <div>Все права защищены, ООО “Клуб Экспертов”</div>
             <div>Всі права захищені, ТОВ "Клуб Експертів"</div>
             <div>All rights reserved, LLC "Experts Club"</div>
           </div>
@@ -121,31 +123,32 @@
 
 <script setup>
 const menus = ref([
-  { name: "Главная", link: "/" },
-  { name: "Новости", link: "/news" },
-  { name: "Аналитика", link: "/analytics" },
-  { name: "Мнения", link: "/opinions" },
-  { name: "Наши эксперты", link: "/experts" },
-  { name: "Партнёры", link: "/partners" },
-  { name: "Контакты", link: "/contacts" },
+  { name: "Головна", link: "/" },
+  { name: "Новини", link: "/news" },
+  { name: "Аналітика", link: "/analytics" },
+  { name: "Думки", link: "/opinions" },
+  { name: "Наші експерти", link: "/experts" },
+  { name: "Про проект", link: "/about" },
+  { name: "Партнери", link: "/partners" },
+  { name: "Контакти", link: "/contacts" },
 ]);
 const cloud = ref("/weather.svg");
 const time = ref("");
 const date = ref("");
-const week = ref(["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]);
+const week = ref(["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]);
 const month = ref([
-  "января",
-  "февраля",
-  "марта",
-  "апреля",
-  "мая",
-  "июня",
-  "июля",
-  "августа",
-  "сентября",
-  "октября",
-  "ноября",
-  "декабря",
+  "січня",
+  "лютого",
+  "березня",
+  "квітня",
+  "травня",
+  "червня",
+  "липня",
+  "серпня",
+  "вересня",
+  "жовтня",
+  "листопада",
+  "грудня",
 ]);
 
 const zeroPadding = (num, digit) => {

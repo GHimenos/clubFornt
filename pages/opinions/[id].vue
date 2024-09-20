@@ -3,8 +3,8 @@
     <div v-for="item in opinions">
       <div v-if="route.params.id == item.id">
         <uiCrumbs
-          first="Главная"
-          second="Мнения"
+          first="Головна"
+          second="Думки"
           :third="item.attributes.name"
           secondLink="/opinions"
           :show="true"
@@ -42,7 +42,7 @@
                           {{ one[0].attributes.description.slice(0, 50) }}...
                         </div>
                         <nuxt-link :to="'../experts/' + one[0].id"
-                          >Подробнее</nuxt-link
+                          >Докладніше</nuxt-link
                         >
                       </div>
                     </div>
@@ -58,7 +58,7 @@
                   <div
                     class="absolute z-10 top-2.5 left-2.5 bg-white rounded-md p-2"
                   >
-                    Реклама от партнеров
+                    Реклама від партнерів
                   </div>
                 </div>
               </div>
@@ -71,7 +71,7 @@
               </div>
               <div class="lg:w-4/12 lg:ml-20 ml-0">
                 <div class="font-base text-center mb-5 mt-5">
-                  СВЯЗАННЫЕ ОБЗОРЫ
+                  ЗВ'ЯЗАНІ ОГЛЯДИ
                 </div>
                 <div v-for="list in opinions">
                   <div
@@ -84,7 +84,7 @@
                       class="mt-4"
                       :title="list.attributes.name.slice(0, 50) + '...'"
                       :body="list.attributes.description"
-                      :linkText="'Подробнее'"
+                      :linkText="'Докладніше'"
                       :link="'/opinions/' + list.id"
                       :img="api + list.attributes.cover"
                     />
@@ -92,10 +92,10 @@
                 </div>
                 <cardEventSideSmall
                   class="mt-4"
-                  :title="'Поддержать проект'"
+                  :title="'Підтримати проект'"
                   :link="'/'"
                   :img="img2"
-                  :body="'Клуб экспертов – независимая площадка, чтобы развиваться дальше, нам нужна ваша поддержка'"
+                  :body="'Клуб експертів – незалежний майданчик, щоб розвиватися далі, нам потрібна ваша підтримка'"
                 />
               </div>
             </div>

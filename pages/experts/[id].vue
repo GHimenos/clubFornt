@@ -3,8 +3,8 @@
     <div v-for="expert in experts">
       <div v-if="route.params.id == expert.id">
         <uiCrumbs
-          first="Главная"
-          second="Наши эксперты"
+          first="Головна"
+          second="Наші експерти"
           :third="expert.attributes.name"
           secondLink="/experts"
           :show="true"
@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="lg:w-4/12 lg:pl-20 p-0 lg:mt-0 mt-8">
-              <div class="font-base text-center mb-5">СВЯЗАННЫЕ ОБЗОРЫ</div>
+              <div class="font-base text-center mb-5">СЗВ'ЯЗАНІ ОГЛЯДИ</div>
               <div v-for="list in opinions">
                 <div
                   v-if="

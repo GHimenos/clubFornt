@@ -1,17 +1,7 @@
 <template>
   <div>
     <div
-      class="
-        bg-white
-        rounded-3xl
-        pt-6
-        pr-2
-        pb-6
-        pl-2
-        h-full
-        flex flex-col
-        justify-between
-      "
+      class="bg-white rounded-3xl pt-6 pr-2 pb-6 pl-2 h-full flex flex-col justify-between"
     >
       <div class="flex items-center justify-center mb-5">
         <img class="w-12 rounded-full mb-2 md:mb-0" :src="img" />
@@ -28,7 +18,10 @@
       </div>
       <div class="text-center mt-5">
         <nuxt-link :to="link">
-          <buttonPrimarySmall :name="'Подробнее'" :color="'backColorPrimary'" />
+          <buttonPrimarySmall
+            :name="'Докладніше'"
+            :color="'backColorPrimary'"
+          />
         </nuxt-link>
       </div>
     </div>

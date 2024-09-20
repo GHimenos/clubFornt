@@ -1,17 +1,21 @@
 <template>
   <div>
     <div class="bg-white rounded-3xl pt-8 sm:pr-16 pb-8 sm:pl-16 pr-8 pl-8">
-      <img class="mb-8" :src="logo" />
+      <nuxt-link to="/">
+        <img class="mb-8" :src="logo" />
+      </nuxt-link>
       <form>
         <div class="text-red-500">{{ error }}</div>
         <inputLarge
           :placeholder="'Email*'"
-          :title="'Адрес электронной почты*'"
+          :title="'Адреса електронної пошти*'"
           type="email"
           v-model="formData.email"
           @change="v$.email.$touch"
         />
-        <div v-if="v$.email.$error" class="text-red-500">Неверный формат</div>
+        <div v-if="v$.email.$error" class="text-red-500">
+          Неправильний формат
+        </div>
         <p></p>
         <inputLarge
           class="mt-8"
@@ -22,12 +26,12 @@
           @change="v$.password.$touch"
         />
         <div v-if="v$.password.$error" class="text-red-500">
-          Минимум 6 символов
+          Мінімум 6 символів
         </div>
       </form>
       <buttonPrimaryBase
         class="mt-8 mb-5"
-        name="Войти в админ панель"
+        name="Увійти"
         color="backColorActive"
         click="onSubmit"
         @onSubmit="onSubmit"

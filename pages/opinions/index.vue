@@ -1,17 +1,17 @@
 <template>
   <div>
-    <uiCrumbs first="Главная" second="Мнения" secondLink="/opinions" />
+    <uiCrumbs first="Головна" second="Думки" secondLink="/opinions" />
     <div class="container mx-auto mt-2 p-5">
       <div class="lg:flex w-full">
         <div class="lg:w-8/12">
-          <div class="text-2xl font-bold">Мнения наших экспертов</div>
+          <div class="text-2xl font-bold">Думки наших експертів</div>
           <div class="flex flex-col">
             <div v-for="item in opinions">
               <cardEventBasic
                 class="mt-4"
                 :title="item.attributes.name"
                 :body="item.attributes.description"
-                :linkText="'Подробнее'"
+                :linkText="'Докладніше'"
                 :link="'/opinions/' + item.id"
                 :img="api + item.attributes.cover"
               />
@@ -25,10 +25,10 @@
         </div>
         <div class="lg:w-4/12 lg:pl-14 p-0 lg:mt-0 mt-8">
           <cardEventSide
-            :title="'Последний обзор'"
+            :title="'Останній огляд'"
             :link="'/'"
             :img="'img3.png'"
-            :body="'Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора '"
+            :body="'Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду '"
           />
         </div>
       </div>

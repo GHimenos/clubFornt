@@ -11,13 +11,13 @@
         class="rounded-md text-lg pt-2 pb-2 pl-4 pr-4 mr-4 max-w-fit text-white font-sans backColorPrimary"
         @click="$emit(clickCancel)"
       >
-        Отмена
+        Скасування
       </button>
       <button
         class="rounded-md text-lg pt-2 pb-2 pl-4 pr-4 mb-4 max-w-fit text-white font-sans backColorActive"
         @click="$emit(clickDelete)"
       >
-        Удалить
+        Видалити
       </button>
     </div>
   </div>

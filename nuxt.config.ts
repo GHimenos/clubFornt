@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     "@formkit/nuxt",
     "nuxt-time",
   ],
+  app: {
+    head: {
+      title: "Клуб експертів",
+    },
+  },
   strapi: {
     url: process.env.STRAPI_URL || "http://127.0.0.1:1337",
     prefix: "/api",

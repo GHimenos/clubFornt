@@ -1,17 +1,17 @@
 <template>
   <div>
-    <uiCrumbs first="Главная" second="Аналитика" secondLink="/analytics" />
+    <uiCrumbs first="Головна" second="Аналітика" secondLink="/analytics" />
     <div class="container mx-auto mt-2 p-5">
       <div class="lg:flex w-full">
         <div class="lg:w-8/12">
-          <div class="text-2xl font-bold">Аналитические обзоры</div>
+          <div class="text-2xl font-bold">Аналітичні огляди</div>
           <div class="flex flex-col">
             <div v-for="item in analytics">
               <cardEventBasic
                 class="mt-4"
                 :title="item.attributes.name"
                 :body="item.attributes.description"
-                :linkText="'Подробнее'"
+                :linkText="'Докладніше'"
                 :link="'/analytics/' + item.id"
                 :img="api + item.attributes.cover"
               />
@@ -32,14 +32,14 @@
               :color="'backColorPrimary'"
             />
             <div class="absolute z-10 top-2.5 left-2.5 bg-white rounded-md p-2">
-              Реклама от партнеров
+              Реклама від партнерів
             </div>
           </div>
           <cardEventSide
-            :title="'Последний обзор'"
+            :title="'Останній огляд'"
             :link="'/'"
             :img="img4"
-            :body="'Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора '"
+            :body="'Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду '"
           />
         </div>
       </div>
