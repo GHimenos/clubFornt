@@ -51,18 +51,42 @@
       <div class="lg:pl-40 lg:pr-40 pl-0 pr-0">
         <div class="flex flex-col">
           <div v-for="item in users">
-            <cardEventAdmin
-              v-if="item.cover == null"
-              :cover="basicUser"
-              :name="item.username"
-              :date="item.createdAt.slice(0, -14)"
-              :link="'/users/' + item.id"
-              :status="item.publish"
-              click="deleteUser"
-              @deleteUser="deleteUser(item)"
-            />
+            <div v-if="user.id != item.id">
+              <div v-for="info in paginatedOne">
+                <div v-if="info.attributes.user == item.id">
+                  <cardEventAdmin
+                    v-if="info.attributes.cover.data != null"
+                    :cover="api + info.attributes.cover.data.attributes.url"
+                    :name="item.username"
+                    :date="item.createdAt.slice(0, -14)"
+                    :link="'/users/' + item.id"
+                    :status="info.attributes.publish"
+                    click="deleteUser"
+                    @deleteUser="deleteUser(item)"
+                  />
+                </div>
+                <div v-if="info.attributes.user == item.id">
+                  <cardEventAdmin
+                    v-if="info.attributes.cover.data == null"
+                    :cover="basicUser"
+                    :name="item.username"
+                    :date="item.createdAt.slice(0, -14)"
+                    :link="'/users/' + item.id"
+                    :status="info.attributes.publish"
+                    click="deleteUser"
+                    @deleteUser="deleteUser(item)"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <uiPagination
+          class="mb-20"
+          @change="refetch"
+          :totalPages="pageCount"
+          :currentPage="page"
+        />
       </div>
     </div>
   </div>
@@ -70,7 +94,7 @@
 
 <script setup lang="ts">
 import type { User } from "~/types";
-import type { Infopublic } from "~/types";
+import type { Info } from "~/types";
 
 const alert = ref(false);
 const message = ref("");
@@ -119,6 +143,22 @@ const apiClient = async () => {
   );
   users.value = response;
 
+  const responseInfo = await client<Info>(
+    "/infos/?populate=cover&sort=id:desc&pagination[pageSize]=1000000",
+    {
+      method: "GET",
+    }
+  );
+
+  users.value = response;
+  userInfo.value = users.value.slice(-1);
+  infos.value = responseInfo.data;
+
+  pageCount.value = Math.ceil(infos.value.length / pageSize.value);
+  let start = pageSize.value * (page.value - 1);
+  let end = start + pageSize.value;
+  paginatedOne.value = infos.value.slice(start, end);
+
   if (user.value.editor == false) {
     show.value = false;
   }
@@ -133,6 +173,15 @@ const refetch = async (pageNumber) => {
 };
 const addUser = async () => {
   try {
+    /*
+    await register({
+      username: username.value,
+      email: email.value,
+      password: password.value,
+      editor: false,
+    });
+    router.push("/users");
+    */
     await client<User>("/users", {
       method: "POST",
       body: {
@@ -142,13 +191,19 @@ const addUser = async () => {
         confirmed: true,
         editor: false,
         role: "",
-        publish: false,
       },
     });
   } catch (e) {
     console.log(e);
   }
-  apiClient();
+  setTimeout(async () => {
+    add.value = false;
+    const response = await find<User>("users");
+    users.value = response;
+    userInfo.value = users.value.slice(-1);
+    await create<Info>("infos", { user: userInfo.value[0].id, publish: false });
+    apiClient();
+  }, 500);
 };
 const deleteUser = (item) => {
   person.value = item.username;
@@ -156,7 +211,6 @@ const deleteUser = (item) => {
   showDelete.value = true;
   //
   status.value = item.publish;
-  console.log(id.value);
 };
 const clickCancel = () => {
   showDelete.value = false;
@@ -169,15 +223,14 @@ const clickDelete = async () => {
   timer();
   try {
     if (status.value == true) {
-      const responsePublic = await client<Infopublic>(
-        "infopublics/?filters[user][$eq]=" + id.value,
+      const responsePublic = await client<Info>(
+        "infos/?filters[origin][$eq]=" + id.value,
         {
           method: "GET",
         }
       );
       publics.value = responsePublic.data[0].id;
-      console.log(responsePublic);
-      await _delete<Infopublic>("infopublics", publics.value);
+      await _delete<Info>("infos", publics.value);
     }
     await _delete<User>("users", id.value);
     showDelete.value = false;

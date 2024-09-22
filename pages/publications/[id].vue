@@ -1,10 +1,10 @@
 <template>
   <div>
-    <uiCrumbs first="Главная" second="Мнения" secondLink="/opinions" />
+    <uiCrumbs first="Головна" second="Думки" secondLink="/opinions" />
     <div class="container mx-auto mt-2 p-5">
       <div class="lg:flex w-full">
         <div class="lg:w-8/12">
-          <div class="text-2xl font-bold">Мнения эксперта</div>
+          <div class="text-2xl font-bold">Думки експерта</div>
           <div class="flex flex-col">
             <div v-for="item in opinions">
               <div v-if="route.params.id == item.attributes.user">
@@ -12,7 +12,7 @@
                   class="mt-4"
                   :title="item.attributes.name"
                   :body="item.attributes.description"
-                  :linkText="'Подробнее'"
+                  :linkText="'Докладніше'"
                   :link="'/opinions/' + item.id"
                   :img="api + item.attributes.cover"
                 />

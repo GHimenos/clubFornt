@@ -79,7 +79,7 @@
           </div>
         </div>
         <div class="lg:w-5/12 lg:pl-14 p-0 lg:mt-0 mt-8">
-          <div class="text-base uppercase text-center">Экспертные мнения</div>
+          <div class="text-base uppercase text-center">Експертні думки</div>
           <div class="grid xl:grid-cols-2 grid-cols-1 gap-4 mt-5">
             <div v-for="item in reversed.slice(0, 4)">
               <div v-for="user in experts">
@@ -101,7 +101,7 @@
             <buttonPrimaryBase
               class="mt-10 text-center"
               color="backColorPrimary"
-              name="Больше мнений"
+              name="Більше думок"
             />
           </nuxt-link>
         </div>
@@ -118,10 +118,10 @@
               :color="'backColorPrimary'"
             />
             <div class="absolute z-10 top-2.5 left-2.5 bg-white rounded-md p-2">
-              Реклама от партнеров
+              Реклама від партнерів
             </div>
           </div>
-          <div class="text-2xl uppercase mt-20">Новости</div>
+          <div class="text-2xl uppercase mt-20">Новини</div>
           <div class="flex flex-col mt-10">
             <formRssPublic v-if="auto" />
             <div v-for="item in news.slice(0, 5)">
@@ -129,7 +129,7 @@
                 class="mt-4"
                 :title="item.attributes.name"
                 :body="item.attributes.description"
-                :linkText="'Подробнее'"
+                :linkText="'Докладніше'"
                 :link="'/news/' + item.id"
                 :img="api + item.attributes.cover"
               />
@@ -139,16 +139,16 @@
             <buttonPrimaryBase
               class="mt-10 text-right"
               color="backColorPrimary"
-              name="Больше новостей"
+              name="Більше новин"
             />
           </nuxt-link>
         </div>
         <div class="lg:w-5/12 lg:pl-14 p-0 lg:mt-0 mt-8">
           <cardEventSideAbout
-            :title="'О проекте'"
+            :title="'Про проект'"
             :link="'/'"
-            :linkText="'Подробнее'"
-            :body="'Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора Краткое описание обзора '"
+            :linkText="'Докладніше'"
+            :body="'Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду Короткий опис огляду'"
           />
         </div>
       </div>

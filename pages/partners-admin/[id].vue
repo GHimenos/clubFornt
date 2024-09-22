@@ -19,7 +19,7 @@
             class="grid md:grid-cols-4 grid-cols-1 gap-4"
           >
             <div>
-              <div class="mb-2 colorGray text-sm">Обложка</div>
+              <div class="mb-2 colorGray text-sm">Обкладинка</div>
               <div v-if="item.attributes.cover.data != null">
                 <img
                   class="rounded-xl"
@@ -44,14 +44,14 @@
                   <input
                     type="submit"
                     class="cursor-pointer"
-                    value="Загрузить"
+                    value="Завантажити"
                   />
                   <div
                     v-if="item.attributes.cover.data != null"
                     class="ml-2 cursor-pointer"
                     @click="deleteCover(item)"
                   >
-                    Удалить
+                    Видалити
                   </div>
                 </div>
               </form>
@@ -67,20 +67,20 @@
               <inputLarge
                 class="mt-4"
                 placeholder=""
-                title="Краткое описание"
+                title="Короткий опис"
                 type="text"
                 v-model="item.attributes.description"
               />
               <inputLarge
                 class="mt-4"
                 placeholder="https://"
-                title="Ссылка"
+                title="Посилання"
                 type="text"
                 v-model="item.attributes.link"
               />
               <div v-if="item.attributes.publish != true">
                 <div Class="mt-10 text-xl" v-if="user.editor == true">
-                  Не забудь сохранить, перед публикацией
+                  Не забудь зберегти перед публікацією
                 </div>
               </div>
               <div class="flex mt-8">
@@ -89,7 +89,7 @@
                     v-if="item.attributes.publish == false"
                     class="mr-4"
                     color="backColorSecondary"
-                    name="Опубликовать"
+                    name="Опублікувати"
                     click="onPublic"
                     @onPublic="onPublic(item)"
                   />
@@ -97,7 +97,7 @@
                     v-if="item.attributes.publish == true"
                     class="mr-4"
                     color="backColorSecondary"
-                    name="Удалить из публикации"
+                    name="Видалити з публікації"
                     click="offPublic"
                     @offPublic="offPublic(item)"
                   />
@@ -105,7 +105,7 @@
                 <buttonPrimaryBase
                   v-if="item.attributes.publish != true"
                   color="backColorActive"
-                  name="Сохранить"
+                  name="Зберегти"
                   click="onSubmit"
                   @onSubmit="onSubmit(item)"
                 />
@@ -180,7 +180,7 @@ const onSubmit = async (item) => {
       description: item.attributes.description,
       link: item.attributes.link,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }
@@ -195,7 +195,7 @@ const onPublic = async (item) => {
     if (item.attributes.cover.data != null) {
       userPic.value = item.attributes.cover.data.attributes.url;
     }
-    message.value = "Успешно";
+    message.value = "Успішно";
     await update<Partneradmin>("partneradmins", item.id, {
       publish: true,
     });
@@ -226,7 +226,7 @@ const offPublic = async (item) => {
     await update<Partneradmin>("partneradmins", item.id, {
       publish: false,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }

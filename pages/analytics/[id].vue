@@ -3,8 +3,8 @@
     <div v-for="item in analytics">
       <div v-if="route.params.id == item.id">
         <uiCrumbs
-          first="Главная"
-          second="Аналитика"
+          first="Головна"
+          second="Аналітика"
           :third="item.attributes.name"
           secondLink="/analytics"
           :show="true"
@@ -38,7 +38,7 @@
                   <div
                     class="absolute z-10 top-2.5 left-2.5 bg-white rounded-md p-2"
                   >
-                    Реклама от партнеров
+                    Реклама від партнерів
                   </div>
                 </div>
               </div>
@@ -61,19 +61,19 @@
                       class="mt-4"
                       :title="list.attributes.name.slice(0, 50) + '...'"
                       :body="list.attributes.description"
-                      :linkText="'Подробнее'"
+                      :linkText="'Докладніше'"
                       :link="'/analytics/' + list.id"
                       :img="api + list.attributes.cover"
                     />
                   </div>
                 </div>
-                <div class="font-base text-center mt-8">ПОСЛЕДНИЕ ОБЗОРЫ</div>
+                <div class="font-base text-center mt-8">ОСТАННІ ОБЗОРИ</div>
                 <cardEventSideSmall
                   class="mt-4"
-                  :title="'Поддержать проект'"
+                  :title="'Підтримати проект'"
                   :link="'/'"
                   :img="img2"
-                  :body="'Клуб экспертов – независимая площадка, чтобы развиваться дальше, нам нужна ваша поддержка'"
+                  :body="'Клуб експертів – незалежний майданчик, щоб розвиватися далі, нам потрібна ваша підтримка'"
                 />
               </div>
             </div>

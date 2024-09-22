@@ -11,28 +11,26 @@
       rss="../rss-admin"
       :show="show"
     />
+
     <div class="container mx-auto pl-5 pr-5">
       <div class="bg-white rounded-3xl p-4 mb-4">
         <div v-for="info in infos">
           <div
-            v-if="route.params.id == info.attributes.user"
+            v-if="route.params.id == info.id"
             class="grid md:grid-cols-4 grid-cols-1 gap-4"
           >
             <div>
-              <div class="mb-2 colorGray text-sm">Фотография</div>
-              <div v-if="info.attributes.cover.data != null">
-                <img
-                  class="rounded-xl"
-                  :src="api + info.attributes.cover.data.attributes.url"
-                />
+              <div class="mb-2 colorGray text-sm">Фотографія</div>
+              <div v-if="info.cover != null">
+                <img class="rounded-xl" :src="api + info.cover.url" />
               </div>
-              <div v-if="info.attributes.cover.data == null">
+              <div v-if="info.cover == null">
                 <img class="rounded-xl" :src="api + basicUser" />
               </div>
               <form
                 name="form"
                 @submit.prevent="addCover(info)"
-                v-if="info.attributes.publish != true"
+                v-if="info.publish != true"
               >
                 <input
                   class="mt-4"
@@ -44,14 +42,14 @@
                   <input
                     type="submit"
                     class="cursor-pointer"
-                    value="Загрузить"
+                    value="Завантажити"
                   />
                   <div
-                    v-if="info.attributes.cover.data != null"
+                    v-if="info.cover != null"
                     class="ml-2 cursor-pointer"
                     @click="deleteCover(info)"
                   >
-                    Удалить
+                    Видалити
                   </div>
                 </div>
               </form>
@@ -60,47 +58,47 @@
               <inputLarge
                 class="mt-4"
                 placeholder=""
-                title="ФИО"
+                title="ПІБ"
                 type="text"
-                v-model="info.attributes.name"
+                v-model="info.name"
               />
               <inputLarge
                 class="mt-4 mb-4"
                 placeholder=""
-                title="Краткое описание"
+                title="Короткий опис"
                 type="text"
-                v-model="info.attributes.description"
+                v-model="info.description"
               />
-              <div class="mb-2 colorGray text-sm">Подробное описание</div>
-              <light-editor v-model="info.attributes.body" />
-              <div v-if="info.attributes.publish != true">
+              <div class="mb-2 colorGray text-sm">Детальний опис</div>
+              <light-editor v-model="info.body" />
+              <div v-if="info.publish != true">
                 <div Class="mt-10 text-xl" v-if="user.editor == true">
-                  Не забудь сохранить, перед публикацией
+                  Не забудь зберегти перед публікацією
                 </div>
               </div>
               <div class="flex mt-8">
                 <div v-if="show">
                   <buttonPrimaryBase
-                    v-if="info.attributes.publish == false"
+                    v-if="info.publish == false"
                     class="mr-4"
                     color="backColorSecondary"
-                    name="Опубликовать"
+                    name="Опублікувати"
                     click="onPublic"
                     @onPublic="onPublic(info)"
                   />
                   <buttonPrimaryBase
-                    v-if="info.attributes.publish == true"
+                    v-if="info.publish == true"
                     class="mr-4"
                     color="backColorSecondary"
-                    name="Убрать из публикации"
+                    name="Прибрати з публікації"
                     click="offPublic"
                     @offPublic="offPublic(info)"
                   />
                 </div>
                 <buttonPrimaryBase
-                  v-if="info.attributes.publish != true"
+                  v-if="info.publish != true"
                   color="backColorActive"
-                  name="Сохранить"
+                  name="Зберегти"
                   click="onSubmit"
                   @onSubmit="onSubmit(info)"
                 />
@@ -122,6 +120,8 @@ definePageMeta({
 import type { User } from "~/types";
 import type { Info } from "~/types";
 import type { Infopublic } from "~/types";
+
+const token = useStrapiToken();
 
 const show = ref(null);
 const alert = ref(false);
@@ -151,10 +151,10 @@ const { delete: _delete } = useStrapi4();
 onMounted(async () => {
   const response = await find<User>("users");
   users.value = response;
-  const responseInfo = await client<Info>("/infos/?populate=cover", {
+  const responseInfo = await client<User>("/users/?populate=cover", {
     method: "GET",
   });
-  infos.value = responseInfo.data;
+  infos.value = responseInfo;
   if (user.value.editor == true) {
     show.value = true;
   }
@@ -166,12 +166,15 @@ const onSubmit = async (info) => {
   alert.value = true;
   timer();
   try {
-    await update<Info>("infos", info.id, {
-      name: info.attributes.name,
-      description: info.attributes.description,
-      body: info.attributes.body,
+    await client<User>(`/users/` + info.id, {
+      method: "PUT",
+      body: {
+        name: info.name,
+        description: info.description,
+        body: info.body,
+      },
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }
@@ -180,21 +183,24 @@ const onPublic = async (info) => {
   alert.value = true;
   timer();
   try {
-    if (info.attributes.cover.data == null) {
+    if (info.cover == null) {
       userPic.value = "/uploads/basic_User_736c630f3f.png";
     }
-    if (info.attributes.cover.data != null) {
-      userPic.value = info.attributes.cover.data.attributes.url;
+    if (info.cover != null) {
+      userPic.value = info.cover.url;
     }
-    message.value = "Успешно";
-    await update<Info>("infos", info.id, {
-      publish: true,
+    message.value = "Успішно";
+    await client<User>(`/users/` + info.id, {
+      method: "PUT",
+      body: {
+        publish: true,
+      },
     });
     await create<Infopublic>("infopublics", {
       user: route.params.id,
-      name: info.attributes.name,
-      description: info.attributes.description,
-      body: info.attributes.body,
+      name: info.name,
+      description: info.description,
+      body: info.body,
       cover: userPic.value,
     });
   } catch (e) {
@@ -212,10 +218,13 @@ const offPublic = async (info) => {
       (item) => item.attributes.user == route.params.id
     );
     await _delete<Infopublic>("infopublics", publicid.value[0].id);
-    await update<Info>("infos", info.id, {
-      publish: false,
+    await client<User>(`/users/` + info.id, {
+      method: "PUT",
+      body: {
+        publish: false,
+      },
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }
@@ -223,16 +232,26 @@ const offPublic = async (info) => {
 };
 const selectedFile = (event) => {
   avatar.value = event.target.files[0];
+  console.log(avatar.value);
 };
+
 async function addCover(info) {
   try {
-    const form = document.forms["form"];
     const formData = new FormData();
-    formData.append("files.cover", avatar.value);
-    formData.append("data", JSON.stringify(form));
-    const { data } = await client<Info>(`/infos/` + info.id, {
-      method: "PUT",
+    formData.append("files", avatar.value);
+
+    const response = await client<Upload>(`/upload`, {
+      method: "POST",
       body: formData,
+    });
+
+    const imageId = response[0].id;
+
+    const dataCover = await client<User>(`/users/` + info.id, {
+      method: "PUT",
+      body: JSON.stringify({
+        cover: imageId,
+      }),
     });
   } catch (e) {
     console.log(e);
@@ -240,15 +259,15 @@ async function addCover(info) {
   timeOut();
 }
 const deleteCover = async (info) => {
-  await _delete<Upload>("/upload/files", info.attributes.cover.data.id);
+  await _delete<Upload>("/upload/files", info.cover.id);
   timeOut();
 };
 const timeOut = async () => {
   setTimeout(async () => {
-    const responseInfo = await client<Info>("/infos/?populate=cover", {
+    const responseInfo = await client<User>("/users/?populate=cover", {
       method: "GET",
     });
-    infos.value = responseInfo.data;
+    infos.value = responseInfo;
   }, 500);
 };
 const timer = () => {

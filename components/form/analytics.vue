@@ -9,7 +9,7 @@
       clickDelete="clickDelete"
       @clickDelete="clickDelete()"
       :name="
-        'Вы действительно уверены что хотите удалить аналитику: ' + person + '?'
+        'Ви дійсно впевнені, що хочете видалити аналітику: ' + person + '?'
       "
     />
     <div class="container mx-auto pl-5 pr-5">
@@ -17,47 +17,24 @@
         <div class="">
           <buttonPrimaryBase
             color="backColorPrimary"
-            name="Добавить аналитику"
+            name="Додати аналітику"
             click="onShow"
             @onShow="onShow"
           />
           <div
             v-if="user.editor == true"
-            class="lg:flex items-center justify-between"
+            class="lg:flex items-center justify-between mt-5"
           >
-            <div class="xl:flex justify-center mr-5 mt-5">
-              <div
-                @click="onAllFilter"
-                class="mr-3 cursor-pointer"
-                :class="{ 'font-bold text-red-500': filterAll == true }"
-              >
-                Все
-              </div>
-              <div
-                @click="onPublishFilter"
-                class="mr-3 cursor-pointer"
-                :class="{ 'font-bold text-red-500': filterPublish == true }"
-              >
-                Опубликованные
-              </div>
-              <div
-                @click="onDraftFilter"
-                class="mr-3 cursor-pointer"
-                :class="{ 'font-bold text-red-500': filterDraft == true }"
-              >
-                Черновики
-              </div>
-            </div>
             <FormKit
               type="select"
-              label="Пользователи"
+              label="Користувачі"
               name="users"
               v-model="valueUser"
               id="onUserFilter"
               @change="onUserFilter(valueUser)"
             >
-              <optgroup label="Пользователи">
-                <option v-for="item in users" :value="item.id">
+              <optgroup label="Користувачі">
+                <option v-for="item in usersFilter" :value="item.id">
                   {{ item.username }}
                 </option>
               </optgroup>
@@ -65,22 +42,60 @@
             <FormKit
               type="date"
               v-model="valueDateBegin"
-              label="Начало"
+              label="Початок"
               validation-visibility="live"
             />
             <FormKit
               type="date"
               v-model="valueDateEnd"
-              label="Kонец"
+              label="Конець"
               validation-visibility="live"
             />
             <buttonPrimaryBase
-              color="backColorActive"
-              name="Применить"
+              color="backColorPrimary"
+              name="Застосувати"
               class="mt-6"
               click="onDateFilter"
               @onDateFilter="onDateFilter"
             />
+            <buttonPrimaryBase
+              color="backColorActive"
+              name="Скинути"
+              class="mt-6"
+              click="onAllFilter"
+              @onAllFilter="onAllFilter"
+            />
+          </div>
+          <div
+            class="xl:flex justify-center mr-5 mt-8"
+            v-if="user.editor == true"
+          >
+            <div
+              @click="onPublishFilter"
+              class="mr-3 cursor-pointer"
+              :class="{
+                'font-bold text-red-500':
+                  filterPublish == true ||
+                  filterPublishUser == true ||
+                  filterDateUserPublish == true ||
+                  filterPublishDate == true,
+              }"
+            >
+              Опубліковані
+            </div>
+            <div
+              @click="onDraftFilter"
+              class="mr-3 cursor-pointer"
+              :class="{
+                'font-bold text-red-500':
+                  filterDraft == true ||
+                  filterDraftUser == true ||
+                  filterDateUserDraft == true ||
+                  filterDraftDate == true,
+              }"
+            >
+              Чернетки
+            </div>
           </div>
         </div>
       </div>
@@ -94,7 +109,7 @@
         />
         <buttonPrimaryBase
           color="backColorActive"
-          name="Создать"
+          name="Створити аналітику"
           click="onSubmit"
           @onSubmit="onSubmit"
         />
@@ -150,7 +165,9 @@ const props = defineProps({
 });
 
 import type { Analyticadmin } from "~/types";
+import type { Analyticpublic } from "~/types";
 import type { User } from "~/types";
+
 const alert = ref(false);
 const message = ref("");
 const currentPage = ref(1);
@@ -158,7 +175,9 @@ const meta = ref([]);
 const title = ref("");
 const person = ref("");
 const id = ref("");
+//
 const analytics = ref([]);
+//
 const add = ref(false);
 const showDelete = ref(null);
 const pageSize = ref(25);
@@ -167,15 +186,28 @@ const page = ref(1);
 const one = ref([]);
 const paginatedOne = ref([]);
 const analyticsAuthor = ref([]);
+//
 const filterAll = ref(true);
 const filterPublish = ref(false);
 const filterDraft = ref(false);
+const filterPublishUser = ref(false);
+const filterPublishDate = ref(false);
+const filterDraftUser = ref(false);
+const filterDraftDate = ref(false);
 const filterUser = ref(false);
 const filterDate = ref(false);
-const users = ref([]);
+const filterDateUser = ref(false);
+const filterDateUserPublish = ref(false);
+const filterDateUserDraft = ref(false);
+const usersFilter = ref([]);
 const valueUser = ref("");
 const valueDateBegin = ref("");
 const valueDateEnd = ref("");
+const publics = ref([]);
+const status = ref("");
+const filterUserOn = ref(false);
+const filterDateOn = ref(false);
+const statusUser = ref("");
 
 const user = useStrapiUser();
 const client = useStrapiClient();
@@ -219,9 +251,69 @@ const apiPublish = async () => {
   analytics.value = response.data;
   meta.value = response.meta.pagination;
 };
+const apiPublishUser = async () => {
+  const response = await client<Analyticadmin>(
+    "/analyticadmins/?filters[user][$eq]=" +
+      statusUser.value +
+      "&filters[publish][$eq]=true&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
+      currentPage.value,
+    {
+      method: "GET",
+    }
+  );
+  analytics.value = response.data;
+  meta.value = response.meta.pagination;
+};
+const apiPublishDate = async () => {
+  const response = await client<Analyticadmin>(
+    "/analyticadmins/?filters[publish][$eq]=true&filters[createdAt][$gte][0]=" +
+      valueDateBegin.value +
+      "T00:00:00.000Z" +
+      "&filters[createdAt][$lte][1]=" +
+      valueDateEnd.value +
+      "T23:59:59.999Z" +
+      "&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
+      currentPage.value,
+    {
+      method: "GET",
+    }
+  );
+  analytics.value = response.data;
+  meta.value = response.meta.pagination;
+};
+const apiDraftDate = async () => {
+  const response = await client<Analyticadmin>(
+    "/analyticadmins/?filters[publish][$eq]=false&filters[createdAt][$gte][0]=" +
+      valueDateBegin.value +
+      "T00:00:00.000Z" +
+      "&filters[createdAt][$lte][1]=" +
+      valueDateEnd.value +
+      "T23:59:59.999Z" +
+      "&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
+      currentPage.value,
+    {
+      method: "GET",
+    }
+  );
+  analytics.value = response.data;
+  meta.value = response.meta.pagination;
+};
 const apiDraft = async () => {
   const response = await client<Analyticadmin>(
     "/analyticadmins/?filters[publish][$eq]=false&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
+      currentPage.value,
+    {
+      method: "GET",
+    }
+  );
+  analytics.value = response.data;
+  meta.value = response.meta.pagination;
+};
+const apiDraftUser = async () => {
+  const response = await client<Analyticadmin>(
+    "/analyticadmins/?filters[user][$eq]=" +
+      statusUser.value +
+      "&filters[publish][$eq]=false&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
       currentPage.value,
     {
       method: "GET",
@@ -260,39 +352,175 @@ const apiDate = async () => {
   analytics.value = response.data;
   meta.value = response.meta.pagination;
 };
+const apiDateUser = async (valueUser) => {
+  const response = await client<Analyticadmin>(
+    "/analyticadmins/?filters[user][$eq]=" +
+      statusUser.value +
+      "&filters[createdAt][$gte][0]=" +
+      valueDateBegin.value +
+      "T00:00:00.000Z" +
+      "&filters[createdAt][$lte][1]=" +
+      valueDateEnd.value +
+      "T23:59:59.999Z" +
+      "&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
+      currentPage.value,
+    {
+      method: "GET",
+    }
+  );
+  analytics.value = response.data;
+  meta.value = response.meta.pagination;
+};
+const apiDateUserPublish = async () => {
+  const response = await client<Analyticadmin>(
+    "/analyticadmins/?filters[publish][$eq]=true&filters[user][$eq]=" +
+      statusUser.value +
+      "&filters[createdAt][$gte][0]=" +
+      valueDateBegin.value +
+      "T00:00:00.000Z" +
+      "&filters[createdAt][$lte][1]=" +
+      valueDateEnd.value +
+      "T23:59:59.999Z" +
+      "&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
+      currentPage.value,
+    {
+      method: "GET",
+    }
+  );
+  analytics.value = response.data;
+  meta.value = response.meta.pagination;
+};
+const apiDateUserDraft = async () => {
+  const response = await client<Analyticadmin>(
+    "/analyticadmins/?filters[publish][$eq]=false&filters[user][$eq]=" +
+      statusUser.value +
+      "&filters[createdAt][$gte][0]=" +
+      valueDateBegin.value +
+      "T00:00:00.000Z" +
+      "&filters[createdAt][$lte][1]=" +
+      valueDateEnd.value +
+      "T23:59:59.999Z" +
+      "&sort=id:desc&pagination[pageSize]=25&pagination[page]=" +
+      currentPage.value,
+    {
+      method: "GET",
+    }
+  );
+  analytics.value = response.data;
+  meta.value = response.meta.pagination;
+};
 onMounted(async () => {
   apiClient();
   const responseUser = await find<User>("users");
-  users.value = responseUser;
+  usersFilter.value = responseUser;
 });
 const onPublishFilter = async () => {
   currentPage.value = 1;
   filterAll.value = false;
   filterPublish.value = true;
   filterDraft.value = false;
+  filterDraftUser.value = false;
+  filterDraftDate.value = false;
   filterUser.value = false;
   filterDate.value = false;
-  valueUser.value = "";
-  apiPublish();
+  filterDateUser.value = false;
+  filterDateUserDraft.value = false;
+  //valueUser.value = "";
+  //filterUserOn.value = false;
+  //valueDateBegin.value = "";
+  //valueDateEnd.value = "";
+  if (filterUserOn.value == true && filterDateOn.value == false) {
+    apiPublishUser();
+    filterPublishUser.value = true;
+    filterPublish.value = false;
+    filterDateUserPublish.value = false;
+    filterPublishDate.value = false;
+  }
+  if (filterUserOn.value == true && filterDateOn.value == true) {
+    apiDateUserPublish();
+    filterPublishUser.value = false;
+    filterPublish.value = false;
+    filterDateUserPublish.value = true;
+    filterPublishDate.value = false;
+  }
+  if (filterUserOn.value == false) {
+    apiPublish();
+    filterPublishUser.value = false;
+    filterPublish.value = true;
+    filterDateUserPublish.value = false;
+    filterPublishDate.value = false;
+  }
+  if (filterUserOn.value == false && filterDateOn.value == true) {
+    apiPublishDate();
+    filterPublishUser.value = false;
+    filterPublish.value = false;
+    filterDateUserPublish.value = false;
+    filterPublishDate.value = true;
+  }
 };
 const onDraftFilter = async () => {
   currentPage.value = 1;
   filterAll.value = false;
   filterPublish.value = false;
+  filterPublishUser.value = false;
+  filterPublishDate.value = false;
   filterDraft.value = true;
   filterUser.value = false;
   filterDate.value = false;
-  valueUser.value = "";
-  apiDraft();
+  filterDateUser.value = false;
+  filterDateUserPublish.value = false;
+  //valueUser.value = "";
+  //filterUserOn.value = false;
+  //valueDateBegin.value = "";
+  //valueDateEnd.value = "";
+  if (filterUserOn.value == true && filterDateOn.value == false) {
+    apiDraftUser();
+    filterDraftUser.value = true;
+    filterDraft.value = false;
+    filterDateUserDraft.value = false;
+    filterDraftDate.value = false;
+  }
+  if (filterUserOn.value == true && filterDateOn.value == true) {
+    apiDateUserDraft();
+    filterDraftUser.value = false;
+    filterDraft.value = false;
+    filterDateUserDraft.value = true;
+    filterDraftDate.value = false;
+  }
+  if (filterUserOn.value == false) {
+    apiDraft();
+    filterDraftUser.value = false;
+    filterDraft.value = true;
+    filterDateUserDraft.value = false;
+    filterDraftDate.value = false;
+  }
+  if (filterUserOn.value == false && filterDateOn.value == true) {
+    apiDraftDate();
+    filterDraftUser.value = false;
+    filterDraft.value = false;
+    filterDateUserDraft.value = false;
+    filterDraftDate.value = true;
+  }
 };
 const onAllFilter = async () => {
   currentPage.value = 1;
   filterAll.value = true;
   filterPublish.value = false;
   filterDraft.value = false;
+  filterPublishUser.value = false;
+  filterDraftUser.value = false;
+  filterPublishDate.value = false;
+  filterDraftDate.value = false;
   filterUser.value = false;
   filterDate.value = false;
+  filterDateUser.value = false;
+  filterDateUserPublish.value = false;
+  filterDateUserDraft.value = false;
   valueUser.value = "";
+  filterUserOn.value = false;
+  filterDateOn.value = false;
+  valueDateBegin.value = "";
+  valueDateEnd.value = "";
   apiClient();
 };
 const onUserFilter = async (valueUser) => {
@@ -300,8 +528,20 @@ const onUserFilter = async (valueUser) => {
   filterAll.value = false;
   filterPublish.value = false;
   filterDraft.value = false;
+  filterPublishUser.value = false;
+  filterPublishDate.value = false;
+  filterDraftDate.value = false;
+  filterDraftUser.value = false;
   filterUser.value = true;
   filterDate.value = false;
+  filterDateUser.value = false;
+  filterUserOn.value = true;
+  filterDateOn.value = false;
+  statusUser.value = valueUser;
+  valueDateBegin.value = "";
+  valueDateEnd.value = "";
+  filterDateUserPublish.value = false;
+  filterDateUserDraft.value = false;
   apiUser(valueUser);
 };
 const onDateFilter = async () => {
@@ -309,10 +549,24 @@ const onDateFilter = async () => {
   filterAll.value = false;
   filterPublish.value = false;
   filterDraft.value = false;
+  filterPublishUser.value = false;
+  filterDraftUser.value = false;
+  filterPublishDate.value = false;
+  filterDraftDate.value = false;
   filterUser.value = false;
-  filterDate.value = true;
-  valueUser.value = "";
-  apiDate();
+  filterDateOn.value = true;
+  filterDateUserPublish.value = false;
+  filterDateUserDraft.value = false;
+  if (filterUserOn.value == true) {
+    apiDateUser();
+    filterDateUser.value = true;
+    filterDate.value = false;
+  }
+  if (filterUserOn.value == false) {
+    apiDate();
+    filterDateUser.value = false;
+    filterDate.value = true;
+  }
 };
 const refetch = async (pageNumber) => {
   if (user.value.editor == true) {
@@ -324,9 +578,17 @@ const refetch = async (pageNumber) => {
       currentPage.value = pageNumber;
       apiPublish();
     }
+    if (filterPublishUser.value == true) {
+      currentPage.value = pageNumber;
+      apiPublishUser();
+    }
     if (filterDraft.value == true) {
       currentPage.value = pageNumber;
       apiDraft();
+    }
+    if (filterDraftUser.value == true) {
+      currentPage.value = pageNumber;
+      apiDraftUser();
     }
     if (filterUser.value == true) {
       currentPage.value = pageNumber;
@@ -335,6 +597,26 @@ const refetch = async (pageNumber) => {
     if (filterDate.value == true) {
       currentPage.value = pageNumber;
       apiDate();
+    }
+    if (filterDateUser.value == true) {
+      currentPage.value = pageNumber;
+      apiDateUser();
+    }
+    if (filterDateUserPublish.value == true) {
+      currentPage.value = pageNumber;
+      apiDateUserPublish();
+    }
+    if (filterDateUserDraft.value == true) {
+      currentPage.value = pageNumber;
+      apiDateUserDraft();
+    }
+    if (filterPublishDate.value == true) {
+      currentPage.value = pageNumber;
+      apiPublishDate();
+    }
+    if (filterDraftDate.value == true) {
+      currentPage.value = pageNumber;
+      apiDraftDate();
     }
   }
   if (user.value.editor == false) {
@@ -356,7 +638,7 @@ const onSubmit = async () => {
       name: title.value,
       publish: false,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }
@@ -365,15 +647,26 @@ const onSubmit = async () => {
 const deleteItem = (item) => {
   person.value = item.attributes.name;
   id.value = item.id;
+  status.value = item.attributes.publish;
   showDelete.value = true;
 };
 const clickDelete = async () => {
   alert.value = true;
   timer();
   try {
+    if (status.value == true) {
+      const responsePublic = await client<Analyticpublic>(
+        "analyticpublics/?filters[origin][$eq]=" + id.value,
+        {
+          method: "GET",
+        }
+      );
+      publics.value = responsePublic.data[0].id;
+      await _delete<Analyticpublic>("analyticpublics", publics.value);
+    }
     await _delete<Analyticadmin>("analyticadmins", id.value);
     showDelete.value = false;
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }

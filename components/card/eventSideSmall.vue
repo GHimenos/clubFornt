@@ -13,7 +13,7 @@
         </div>
         <div class="mt-5">
           <buttonPrimarySemi
-            :name="'Поддержать проект'"
+            :name="'Підтримати проект'"
             :color="'backColorPrimary'"
           />
         </div>

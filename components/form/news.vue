@@ -8,16 +8,14 @@
       @clickCancel="clickCancel()"
       clickDelete="clickDelete"
       @clickDelete="clickDelete()"
-      :name="
-        'Вы действительно уверены что хотите удалить новость: ' + person + '?'
-      "
+      :name="'Ви дійсно впевнені, що хочете видалити новину: ' + person + '?'"
     />
     <div class="container mx-auto pl-5 pr-5">
       <div class="bg-white rounded-xl p-4 mb-4">
         <div class="">
           <buttonPrimaryBase
             color="backColorPrimary"
-            name="Добавить новость"
+            name="Додати новину"
             click="onShow"
             @onShow="onShow"
           />
@@ -27,13 +25,13 @@
           >
             <FormKit
               type="select"
-              label="Пользователи"
+              label="Користувачі"
               name="users"
               v-model="valueUser"
               id="onUserFilter"
               @change="onUserFilter(valueUser)"
             >
-              <optgroup label="Пользователи">
+              <optgroup label="Користувачі">
                 <option v-for="item in usersFilter" :value="item.id">
                   {{ item.username }}
                 </option>
@@ -42,31 +40,34 @@
             <FormKit
               type="date"
               v-model="valueDateBegin"
-              label="Начало"
+              label="Початок"
               validation-visibility="live"
             />
             <FormKit
               type="date"
               v-model="valueDateEnd"
-              label="Kонец"
+              label="Конець"
               validation-visibility="live"
             />
             <buttonPrimaryBase
               color="backColorPrimary"
-              name="Применить"
+              name="Застосувати"
               class="mt-6"
               click="onDateFilter"
               @onDateFilter="onDateFilter"
             />
             <buttonPrimaryBase
               color="backColorActive"
-              name="Сбросить"
+              name="Скинути"
               class="mt-6"
               click="onAllFilter"
               @onAllFilter="onAllFilter"
             />
           </div>
-          <div class="xl:flex justify-center mr-5 mt-8">
+          <div
+            class="xl:flex justify-center mr-5 mt-8"
+            v-if="user.editor == true"
+          >
             <div
               @click="onPublishFilter"
               class="mr-3 cursor-pointer"
@@ -78,7 +79,7 @@
                   filterPublishDate == true,
               }"
             >
-              Опубликованные
+              Опубліковані
             </div>
             <div
               @click="onDraftFilter"
@@ -91,7 +92,7 @@
                   filterDraftDate == true,
               }"
             >
-              Черновики
+              Чернетки
             </div>
           </div>
         </div>
@@ -106,7 +107,7 @@
         />
         <buttonPrimaryBase
           color="backColorActive"
-          name="Создать новость"
+          name="Створити новину"
           click="onSubmit"
           @onSubmit="onSubmit"
         />
@@ -170,7 +171,9 @@ const meta = ref([]);
 const title = ref("");
 const person = ref("");
 const id = ref("");
+//
 const news = ref([]);
+//
 const add = ref(false);
 const showDelete = ref(null);
 const pageSize = ref(25);
@@ -179,6 +182,7 @@ const page = ref(1);
 const one = ref([]);
 const paginatedOne = ref([]);
 const newsAuthor = ref([]);
+//
 const filterAll = ref(true);
 const filterPublish = ref(false);
 const filterDraft = ref(false);
@@ -630,7 +634,7 @@ const onSubmit = async () => {
       name: title.value,
       publish: false,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }
@@ -658,7 +662,7 @@ const clickDelete = async () => {
     }
     await _delete<Newsadmin>("newsadmins", id.value);
     showDelete.value = false;
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }

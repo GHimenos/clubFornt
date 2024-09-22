@@ -1,8 +1,8 @@
 <template>
   <div>
     <uiCrumbs
-      first="Главная"
-      second="Контакты"
+      first="Головна"
+      second="Контакти"
       secondLink="/contacts"
       :show="false"
     />
@@ -11,17 +11,17 @@
         <div class="lg:w-4/12">
           <img class="w-80" :src="logo" />
           <div class="mt-10">
-            Аналитические исследования в сфере макроэкономики, политологии,
-            футурологии с использованием передовых научно-технических достижений
-            и методов. Создание видеоконтента, в будущем – документального
-            контента. Проведение конференций, консалтинг, развитие дискуссионных
-            площадок.
+            Аналітичні дослідження у сфері макроекономіки, політології,
+            футурології з використанням передових науково-технічних досягнень та
+            методів. Створення відеоконтенту, надалі – документального контенту.
+            Проведення конференцій, консалтинг, розвиток дискусійних
+            майданчиків.
           </div>
-          <div class="mt-14 text-lg font-bold">Контактная информация</div>
+          <div class="mt-14 text-lg font-bold">Контактна інформація</div>
           <div class="flex mt-5">
-            <div class="w-1/5 colorGray">Адрес:</div>
+            <div class="w-1/5 colorGray">Адреса:</div>
             <div class="w-4/5">
-              Киев, ул Василия Тютюнника (бывшая Анри Барбюса) 51/1А, офис 112
+              Київ, вул. Василя Тютюнника (колишня Анрі Барбюса) 51/1А, офіс 112
             </div>
           </div>
           <div class="flex mt-2">
@@ -29,35 +29,21 @@
             <div class="w-4/5">+380 67 232 00 42</div>
           </div>
           <div class="flex mt-2">
-            <div class="w-1/5 colorGray">Почта:</div>
+            <div class="w-1/5 colorGray">Пошта:</div>
             <div class="w-4/5">club@experts.news</div>
           </div>
         </div>
         <div class="lg:w-4/12 lg:pl-20 p-0 lg:mt-0 mt-8">
-          <div class="text-lg font-bold">Есть вопросы? Свяжитесь с нами!</div>
-          <inputPrimary placeholder="Ваше имя" class="mt-10" />
+          <div class="text-lg font-bold">Чи є питання? Зв'яжіться з нами!</div>
+          <inputPrimary placeholder="Ваше ім'я:" class="mt-10" />
           <inputPrimary placeholder="Email:" class="mt-5" />
           <textarea
-            placeholder="Ваше сообщение:"
-            class="
-              text-lg
-              pt-2.5
-              pr-5
-              pb-2.5
-              pl-5
-              mt-5
-              leading-5
-              border
-              rounded-lg
-              backColorBg
-              border-gray-400
-              w-full
-              h-32
-            "
+            placeholder="Ваше повідомлення:"
+            class="text-lg pt-2.5 pr-5 pb-2.5 pl-5 mt-5 leading-5 border rounded-lg backColorBg border-gray-400 w-full h-32"
           />
           <label class="text-xs">
             <input type="checkbox" required />
-            Соглашаюсь на <a>обработку персональных данных</a>
+            Погоджуюсь на <a>обробку персональних даних</a>
           </label>
           <buttonPrimaryBase
             class="mt-5"

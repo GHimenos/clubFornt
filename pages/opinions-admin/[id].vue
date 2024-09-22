@@ -19,7 +19,7 @@
             class="grid md:grid-cols-4 grid-cols-1 gap-4"
           >
             <div>
-              <div class="mb-2 colorGray text-sm">Обложка</div>
+              <div class="mb-2 colorGray text-sm">Обкладинка</div>
               <div v-if="item.attributes.cover.data != null">
                 <img
                   class="rounded-xl"
@@ -44,14 +44,14 @@
                   <input
                     type="submit"
                     class="cursor-pointer"
-                    value="Загрузить"
+                    value="Завантажити"
                   />
                   <div
                     v-if="item.attributes.cover.data != null"
                     class="ml-2 cursor-pointer"
                     @click="deleteCover(item)"
                   >
-                    Удалить
+                    Видалити
                   </div>
                 </div>
               </form>
@@ -67,15 +67,15 @@
               <inputLarge
                 class="mt-4"
                 placeholder=""
-                title="Краткое описание"
+                title="Короткий опис"
                 type="text"
                 v-model="item.attributes.description"
               />
-              <div class="mb-2 colorGray text-sm mt-4">Мнение</div>
+              <div class="mb-2 colorGray text-sm mt-4">Думка</div>
               <light-editor v-model="item.attributes.body" />
               <div v-if="item.attributes.publish != true">
                 <div Class="mt-10 text-xl" v-if="user.editor == true">
-                  Не забудь сохранить, перед публикацией
+                  Не забудь зберегти перед публікацією
                 </div>
               </div>
               <div class="flex mt-8">
@@ -84,7 +84,7 @@
                     v-if="item.attributes.publish == false"
                     class="mr-4"
                     color="backColorSecondary"
-                    name="Опубликовать"
+                    name="Опублікувати"
                     click="onPublic"
                     @onPublic="onPublic(item)"
                   />
@@ -92,7 +92,7 @@
                     v-if="item.attributes.publish == true"
                     class="mr-4"
                     color="backColorSecondary"
-                    name="Убрать из публикации"
+                    name="Прибрати з публікації"
                     click="offPublic"
                     @offPublic="offPublic(item)"
                   />
@@ -100,7 +100,7 @@
                 <buttonPrimaryBase
                   v-if="item.attributes.publish != true"
                   color="backColorActive"
-                  name="Сохранить"
+                  name="Зберегти"
                   click="onSubmit"
                   @onSubmit="onSubmit(item)"
                 />
@@ -174,7 +174,7 @@ const onSubmit = async (item) => {
       body: item.attributes.body,
       description: item.attributes.description,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }
@@ -192,7 +192,7 @@ const onPublic = async (item) => {
     await update<Opinionadmin>("opinionadmins", item.id, {
       publish: true,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
     await create<Opinionpublic>("opinionpublics", {
       user: item.attributes.user,
       username: item.attributes.username,
@@ -222,7 +222,7 @@ const offPublic = async (item) => {
     await update<Opinionadmin>("opinionadmins", item.id, {
       publish: false,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }

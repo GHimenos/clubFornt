@@ -1,6 +1,6 @@
 <template>
   <div>
-    <uiCrumbs first="Главная" second="Партнеры" secondLink="/partners" />
+    <uiCrumbs first="Головна" second="Партнери" secondLink="/partners" />
     <div class="container mx-auto mt-2 p-5">
       <div class="grid lg:grid-cols-3 grid-cols-1 gap-4">
         <div v-for="partner in partners">
@@ -9,7 +9,7 @@
             :img="api + partner.attributes.cover"
             :firstName="partner.attributes.name"
             :body="partner.attributes.description"
-            :moreText="'Подробнее'"
+            :moreText="'Докладніше'"
             :moreLink="partner.attributes.link"
             :publicLink="'/'"
           />

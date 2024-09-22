@@ -1,7 +1,7 @@
 <template>
   <div>
     <div @click="onClick" class="cursor-pointer flex">
-      <nuxt-icon name="iconExit" class="text-2xl pr-1" />Выйти
+      <nuxt-icon name="iconExit" class="text-2xl pr-1" />Вийти
     </div>
   </div>
 </template>

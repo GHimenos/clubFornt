@@ -2,8 +2,12 @@
   <div>
     <div class="w-full bg-white">
       <div class="container mx-auto flex items-center justify-between p-5">
-        <img class="sm:block hidden" :src="logo" />
-        <img class="block sm:hidden" :src="logoIcon" />
+        <nuxt-link to="/">
+          <img class="sm:block hidden" :src="logo" />
+        </nuxt-link>
+        <nuxt-link to="/">
+          <img class="block sm:hidden" :src="logoIcon" />
+        </nuxt-link>
         <div class="flex items-center">
           <div class="hidden sm:block">
             <nuxt-link :to="'/users/' + user.id" class="flex">

@@ -8,15 +8,13 @@
       @clickCancel="clickCancel()"
       clickDelete="clickDelete"
       @clickDelete="clickDelete()"
-      :name="
-        'Вы действительно уверены что хотите удалить партнера: ' + person + '?'
-      "
+      :name="'Ви дійсно впевнені, що хочете видалити партнера: ' + person + '?'"
     />
     <div class="container mx-auto pl-5 pr-5">
       <div class="bg-white rounded-xl p-4 mb-4">
         <buttonPrimaryBase
           color="backColorPrimary"
-          name="Добавить партнера"
+          name="Додати партнера"
           click="onShow"
           @onShow="onShow"
         />
@@ -24,14 +22,14 @@
       <div class="bg-white rounded-3xl p-4 mb-4" v-if="add">
         <inputLarge
           placeholder=""
-          title="Название"
+          title="Назва"
           type="text"
           v-model="title"
           class="mb-5"
         />
         <buttonPrimaryBase
           color="backColorActive"
-          name="Создать"
+          name="Створити партнера"
           click="onSubmit"
           @onSubmit="onSubmit"
         />
@@ -69,7 +67,9 @@ const props = defineProps({
   form: Boolean,
 });
 
-import type { Partner } from "~/types";
+import type { Partneradmin } from "~/types";
+import type { Partnerpublic } from "~/types";
+
 const alert = ref(false);
 const message = ref("");
 const currentPage = ref(1);
@@ -80,7 +80,10 @@ const id = ref("");
 const partners = ref([]);
 const add = ref(false);
 const showDelete = ref(null);
-
+//
+const status = ref("");
+const publics = ref([]);
+//
 const user = useStrapiUser();
 const client = useStrapiClient();
 const { create } = useStrapi();
@@ -103,7 +106,7 @@ const onShow = () => {
 };
 const refetch = async (pageNumber) => {
   currentPage.value = pageNumber;
-  const response = await client<Newsadmin>(
+  const response = await client<Partneradmin>(
     "/partneradmins/?populate=cover&sort=id:desc&pagination[pageSize]=10&pagination[page]=" +
       currentPage.value,
     {
@@ -121,7 +124,7 @@ const onSubmit = async () => {
       name: title.value,
       publish: false,
     });
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }
@@ -131,14 +134,26 @@ const deleteItem = (item) => {
   person.value = item.attributes.name;
   id.value = item.id;
   showDelete.value = true;
+  //
+  status.value = item.attributes.publish;
 };
 const clickDelete = async () => {
   alert.value = true;
   timer();
   try {
+    if (status.value == true) {
+      const responsePublic = await client<Partnerpublic>(
+        "partnerpublics/?filters[origin][$eq]=" + id.value,
+        {
+          method: "GET",
+        }
+      );
+      publics.value = responsePublic.data[0].id;
+      await _delete<Analyticpublic>("partnerpublics", publics.value);
+    }
     await _delete<Partneradmin>("partneradmins", id.value);
     showDelete.value = false;
-    message.value = "Успешно";
+    message.value = "Успішно";
   } catch (e) {
     message.value = e;
   }

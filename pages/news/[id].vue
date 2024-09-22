@@ -3,8 +3,8 @@
     <div v-for="(item, index) in rss">
       <div v-if="route.params.id == 'rss' + index">
         <uiCrumbs
-          first="Главная"
-          second="Новости"
+          first="Головна"
+          second="Новини"
           :third="item.title"
           secondLink="/news"
           :show="true"
@@ -18,9 +18,7 @@
             <div
               class="lg:w-8/12 lg:pl-10 p-0 lg:mt-0 mt-8 flex flex-col justify-between"
             >
-              <div class="text-5xl font-bold">
-                {{ item.title }}
-              </div>
+              <div class="text-5xl font-bold">{{ item.title }}</div>
               <div class="rounded-2xl overflow-hidden relative">
                 <img class="w-full h-44 object-cover" :src="img" />
                 <buttonPrimaryMedium
@@ -31,7 +29,7 @@
                 <div
                   class="absolute z-10 top-2.5 left-2.5 bg-white rounded-md p-2"
                 >
-                  Реклама от партнеров
+                  Реклама від партнерів
                 </div>
               </div>
             </div>
@@ -43,13 +41,13 @@
               <div v-html="item.description"></div>
             </div>
             <div class="lg:w-4/12 lg:ml-20 ml-0">
-              <div class="font-base text-center mt-8">ПОСЛЕДНИЕ НОВОСТИ</div>
+              <div class="font-base text-center mt-8">ОСТАННІ НОВИНИ</div>
               <cardEventSideSmall
                 class="mt-4"
-                :title="'Поддержать проект'"
+                :title="'Підтримати проект'"
                 :link="'/'"
                 :img="img2"
-                :body="'Клуб экспертов – независимая площадка, чтобы развиваться дальше, нам нужна ваша поддержка'"
+                :body="'Клуб експертів – незалежний майданчик, щоб розвиватися далі, нам потрібна ваша підтримка'"
               />
               <div class="flex flex-col-reverse">
                 <div v-for="list in news.slice(news.length - 5, news.length)">
@@ -58,7 +56,7 @@
                       class="mt-4"
                       :title="list.attributes.name.slice(0, 50) + '...'"
                       :body="list.attributes.description"
-                      :linkText="'Подробнее'"
+                      :linkText="'Докладніше'"
                       :link="'/analytics/' + list.id"
                       :img="api + list.attributes.cover"
                     />
@@ -73,8 +71,8 @@
     <div v-for="item in news">
       <div v-if="route.params.id == item.id">
         <uiCrumbs
-          first="Главная"
-          second="Новости"
+          first="Головна"
+          second="Новини"
           :third="item.attributes.name"
           secondLink="/news"
           :show="true"
@@ -108,7 +106,7 @@
                   <div
                     class="absolute z-10 top-2.5 left-2.5 bg-white rounded-md p-2"
                   >
-                    Реклама от партнеров
+                    Реклама від партнерів
                   </div>
                 </div>
               </div>
@@ -120,13 +118,13 @@
                 <div v-html="item.attributes.body"></div>
               </div>
               <div class="lg:w-4/12 lg:ml-20 ml-0">
-                <div class="font-base text-center mt-8">ПОСЛЕДНИЕ НОВОСТИ</div>
+                <div class="font-base text-center mt-8">ОСТАННІ НОВИНИ</div>
                 <cardEventSideSmall
                   class="mt-4"
-                  :title="'Поддержать проект'"
+                  :title="'Підтримати проект'"
                   :link="'/'"
                   :img="img2"
-                  :body="'Клуб экспертов – независимая площадка, чтобы развиваться дальше, нам нужна ваша поддержка'"
+                  :body="'Клуб експертів – незалежний майданчик, щоб розвиватися далі, нам потрібна ваша підтримка'"
                 />
                 <div class="flex flex-col-reverse">
                   <div v-for="list in news.slice(news.length - 5, news.length)">
@@ -135,7 +133,7 @@
                         class="mt-4"
                         :title="list.attributes.name.slice(0, 50) + '...'"
                         :body="list.attributes.description"
-                        :linkText="'Подробнее'"
+                        :linkText="'Докладніше'"
                         :link="'/analytics/' + list.id"
                         :img="api + list.attributes.cover"
                       />
