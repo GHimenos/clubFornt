@@ -9,7 +9,7 @@ env:
   STRAPI_URL: 'http://be.experts.news'
 
 jobs:
-  test-redeploy:
+  redeploy:
     runs-on: ubuntu-latest
     defaults:
       run:
