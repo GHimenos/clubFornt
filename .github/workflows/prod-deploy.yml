@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  STRAPI_URL: 'http://be.experts.news'
+  STRAPI_URL: 'https://be.experts.news'
 
 jobs:
   redeploy:
