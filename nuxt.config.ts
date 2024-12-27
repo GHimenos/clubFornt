@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "@nuxtjs/strapi",
     "@formkit/nuxt",
     "nuxt-time",
+    "nuxt-swiper",
   ],
   app: {
     head: {

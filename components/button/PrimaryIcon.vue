@@ -1,7 +1,7 @@
 <template>
   <div>
     <button
-      class="rounded-xl text-sm pt-2 pb-2 pl-4 pr-4 max-w-fit text-white flex items-center font-sans"
+      class="rounded-xl text-sm pt-2 pb-2 pl-4 pr-4 w-32 text-white flex items-center font-sans justify-center"
       :class="color"
       @click="$emit(click)"
     >
