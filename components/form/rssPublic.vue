@@ -26,7 +26,8 @@ const responseHtml = ref("");
 const itemTitle = ref(null);
 const itemDesc = ref(null);
 const rss = ref([]);
-const { data: count } = await useFetch("http://host-club:8888/rss.php");
+//const { data: count } = await useFetch("http://host-club:8888/rss.php");
+const { data: count } = await useFetch("https://experts.news/index.php");
 //
 
 onMounted(async () => {

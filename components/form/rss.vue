@@ -52,7 +52,8 @@ const responseHtml = ref("");
 const itemTitle = ref(null);
 const itemDesc = ref(null);
 const rss = ref([]);
-const { data: count } = await useFetch("http://rss:8888/");
+//const { data: count } = await useFetch("http://rss:8888/");
+const { data: count } = await useFetch("https://experts.news/index.php");
 //
 
 const { update } = useStrapi();

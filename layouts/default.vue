@@ -2,15 +2,20 @@
   <div>
     <div class="w-full bg-white">
       <div class="container mx-auto menuIndex items-center justify-between p-5">
-        <nuxt-link to="/"><img src="/logo.svg" /></nuxt-link>
-        <inputPrimary
-          :placeholder="'Пошук...'"
-          class="xl:w-96 w-80 menuButton"
+        <nuxt-link class="mb-4" to="/"><img src="/logo.svg" /></nuxt-link>
+        <input
+          class="text-lg pt-2.5 pr-5 pb-2.5 pl-5 leading-5 border rounded-lg backColorBg border-gray-400 w-72"
+          v-model="query"
+          @keyup.enter="performSearch"
+          placeholder="Пошук..."
         />
-        <div class="flex menuButton">
+        <button v-if="!isLargeScreen" @click="toggleMenu" class="mt-4">
+          ☰ Меню
+        </button>
+        <div class="flex menuButton" v-if="menuVisible">
           <buttonPrimaryIcon
             class="mr-6"
-            :name="'Наш Youtube'"
+            :name="'Youtube'"
             :icon="'iconYoutube'"
             :color="'backColorActive'"
             click="onYoutube"
@@ -19,7 +24,7 @@
             "
           />
           <buttonPrimaryIcon
-            :name="'Telegram канал'"
+            :name="'Telegram'"
             :icon="'iconTelegram'"
             :color="'backColorPrimary'"
             click="onTelegram"
@@ -30,29 +35,32 @@
           </nuxt-link>
         </div>
       </div>
-      <div
-        class="container mx-auto menuIndex pl-5 pr-5 pb-5 justify-between mt-3"
-      >
-        <ul class="ulMenu" v-for="item in menus">
-          <li>
-            <nuxt-link class="headLink text-lg" :to="item.link">{{
-              item.name
-            }}</nuxt-link>
-          </li>
-        </ul>
-      </div>
-      <div
-        class="menuIndex xl:w-6/12 w-8/12 justify-between mx-auto pb-4 colorSecondary"
-      >
-        <div class="menuWheather">
-          <img :src="cloud" class="mr-2" />{{ weather.current.temp_c }} °C Киев
+      <div v-if="menuVisible" class="burger-menu">
+        <div
+          class="container mx-auto menuIndex pl-5 pr-5 pb-5 justify-between mt-3"
+        >
+          <ul class="ulMenu" v-for="item in menus">
+            <li>
+              <nuxt-link class="headLink text-lg" :to="item.link">{{
+                item.name
+              }}</nuxt-link>
+            </li>
+          </ul>
         </div>
-        <div>{{ date }} {{ time }}</div>
-        <div v-for="item in currency">
-          {{ item.ccy }}
-          {{ item.buy.slice(0, 5) }}/<span class="colorActive">{{
-            item.sale.slice(0, 5)
-          }}</span>
+        <div
+          class="menuIndex xl:w-6/12 w-8/12 justify-between mx-auto pb-4 colorSecondary"
+        >
+          <div class="menuWheather">
+            <img :src="cloud" class="mr-2" />{{ weather.current.temp_c }} °C
+            Киев
+          </div>
+          <div>{{ date }} {{ time }}</div>
+          <div v-for="item in currency">
+            {{ item.ccy }}
+            {{ item.buy.slice(0, 5) }}/<span class="colorActive">{{
+              item.sale.slice(0, 5)
+            }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -67,7 +75,7 @@
             <div class="flex mt-4">
               <buttonPrimaryIcon
                 class="mr-4"
-                :name="'Наш Youtube'"
+                :name="'Youtube'"
                 :icon="'iconYoutube'"
                 :color="'backColorActive'"
                 click="onYoutube"
@@ -78,7 +86,7 @@
                 "
               />
               <buttonPrimaryIcon
-                :name="'Telegram канал'"
+                :name="'Telegram'"
                 :icon="'iconTelegram'"
                 :color="'backColorPrimary'"
                 click="onTelegram"
@@ -132,6 +140,45 @@ const menus = ref([
   { name: "Партнери", link: "/partners" },
   { name: "Контакти", link: "/contacts" },
 ]);
+
+import { ref } from "vue";
+
+const query = ref("");
+
+function performSearch() {
+  if (query.value.trim()) {
+    // Перенаправление на страницу с результатами
+    navigateTo(`/search?q=${encodeURIComponent(query.value)}`);
+  }
+}
+
+const menuVisible = ref(true);
+const isLargeScreen = ref(false);
+
+onMounted(() => {
+  const checkScreenWidth = () => {
+    isLargeScreen.value = window.innerWidth > 1024;
+
+    if (!isLargeScreen.value) {
+      menuVisible.value = false;
+    } else {
+      menuVisible.value = true;
+    }
+  };
+
+  checkScreenWidth();
+
+  window.addEventListener("resize", checkScreenWidth);
+
+  onUnmounted(() => {
+    window.removeEventListener("resize", checkScreenWidth);
+  });
+});
+
+const toggleMenu = () => {
+  menuVisible.value = !menuVisible.value;
+};
+
 const cloud = ref("/weather.svg");
 const time = ref("");
 const date = ref("");
